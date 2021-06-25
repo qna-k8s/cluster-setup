@@ -1,4 +1,9 @@
-cluster_role_rules:
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: eks_user_role
+  namespace: default
+rules:
   - apiGroups: ["apps"]
     resources: ["deployments", "deployments/*", "replicasets", "replicasets/*"]
     verbs: ["get", "list", "watch", "create", "update", "delete"]
@@ -17,18 +22,32 @@ cluster_role_rules:
   - apiGroups: ["autoscaling"]
     resources: ["horizontalpodautoscalers","horizontalpodautoscalers/*"]
     verbs: ["get", "list", "watch", "create", "update", "delete"]
-  
-cluster_role_binding:
-    apiGroup: rbac.authorization.k8s.io
-    kind: ClusterRole
-    subjects:
-      - kind: Group
-        name: eks_user_group
-        apiGroup: rbac.authorization.k8s.io
 
-cluster_role:
-    name: eks_user_role
-aws_auth_users:
-  - userarn: arn:aws:iam::450839793689:user/eks_user
-    username: eks_user
-    groups: ["eks_user_group"]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: eks_user_cluster_role_binding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: eks_user_role
+subjects:
+  - kind: Group
+    name: eks_user_group
+    apiGroup: rbac.authorization.k8s.io
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapUsers: |-
+    - userarn: arn:aws:iam::450839793689:user/eks_user
+      username: eks_user
+      groups: ["eks_user_group"]

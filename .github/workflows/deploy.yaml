@@ -33,5 +33,4 @@ jobs:
             ./deploy_chart.sh
       - name: Setup ghactions user for CI/CD
         run: |
-            chmod 777 ./deploy_gh_user.sh
-            ./deploy_gh_user.sh
+            kubectl apply -f ./gh_actions_user.yaml

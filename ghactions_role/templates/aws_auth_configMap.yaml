@@ -1,7 +1,0 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: aws-auth
-  namespace: kube-system
-data:
-{{- include "aws_auth_map_users" . | indent 2 }}
