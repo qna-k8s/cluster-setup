@@ -1,0 +1,29 @@
+name: Install prerequisite services in the cluster
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  deploy_chart_to_cluster:
+    name: Deploy helm chart to cluster
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install packages
+        run: |
+          sudo apt-get update
+      - name: Setup AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ADMIN_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_ADMIN_SECRET_KEY }}
+          aws-region: us-east-1
+      - name: Configure Kubectl
+        run: |
+          aws eks update-kubeconfig --name qna_cluster
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+      - name: Install metrics server
+        run: |
+            chmod 777 ./deploy_chart.sh
+            ./deploy_chart.sh
