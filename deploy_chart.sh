@@ -1,8 +1,8 @@
 #!/bin/bash
-var=$(helm status qna-csr 2>&1)
+var=$(helm status cluster-setup 2>&1)
 errorMsg="Error: release: not found"
-installCmd="helm install qna-cluster-setup ./metrics_server"
-updateCmd="helm upgrade qna-cluster-steup"
+installCmd="helm install cluster-setup ./metrics_server"
+updateCmd="helm upgrade cluster-steup"
 if [ "$var" = "$errorMsg" ]
 then
     eval $installCmd

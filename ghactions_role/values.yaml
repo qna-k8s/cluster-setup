@@ -1,0 +1,34 @@
+cluster_role_rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments", "deployments/*", "replicasets", "replicasets/*"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["configmaps", "configmap/*", "secrets", "secrets/*"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims", "persistentvolumeclaims/*", "persistentvolumes/*", "persistentvolumes"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["namespaces", "pods", "services", "pods/exec","pods/status","events", "nodes","services/*","pods/log","replicationcontrollers","replicationcontrollers/*"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses","storageclasses/*"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: ["autoscaling"]
+    resources: ["horizontalpodautoscalers","horizontalpodautoscalers/*"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  
+cluster_role_binding:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    subjects:
+      - kind: Group
+        name: eks_user_group
+        apiGroup: rbac.authorization.k8s.io
+
+cluster_role:
+    name: eks_user_role
+aws_auth_users:
+  - userarn: arn:aws:iam::450839793689:user/eks_user
+    username: eks_user
+    groups: ["eks_user_group"]

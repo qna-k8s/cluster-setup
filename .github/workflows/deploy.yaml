@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   deploy_chart_to_cluster:
-    name: Deploy helm chart to cluster
+    name: Deploy helm charts to cluster
     runs-on: ubuntu-latest
     steps:
       - name: Install packages
@@ -23,7 +23,15 @@ jobs:
           aws eks update-kubeconfig --name qna_cluster
       - name: Checkout the repo
         uses: actions/checkout@v2
+      - name: Wait for the cluster to start
+        run: |
+            chmod 777 ./wait_for_cluster.sh
+            ./wait_for_cluster.sh        
       - name: Install metrics server
         run: |
             chmod 777 ./deploy_chart.sh
             ./deploy_chart.sh
+      - name: Setup ghactions user for CI/CD
+        run: |
+            chmod 777 ./deploy_gh_user.sh
+            ./deploy_gh_user.sh
