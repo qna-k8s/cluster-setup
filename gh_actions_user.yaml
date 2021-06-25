@@ -6,22 +6,22 @@ metadata:
 rules:
   - apiGroups: ["apps"]
     resources: ["deployments", "deployments/*", "replicasets", "replicasets/*"]
-    verbs: ["get", "list", "watch", "create", "update", "delete"]
+    verbs: ["get", "list", "watch", "create", "update", "delete","patch"]
   - apiGroups: [""]
     resources: ["configmaps", "configmap/*", "secrets", "secrets/*"]
-    verbs: ["get", "list", "watch", "create", "update", "delete"]
+    verbs: ["get", "list", "watch", "create", "update", "delete","patch"]
   - apiGroups: [""]
     resources: ["persistentvolumeclaims", "persistentvolumeclaims/*", "persistentvolumes/*", "persistentvolumes"]
-    verbs: ["get", "list", "watch", "create", "update", "delete"]
+    verbs: ["get", "list", "watch", "create", "update", "delete","patch"]
   - apiGroups: [""]
     resources: ["namespaces", "pods", "services", "pods/exec","pods/status","events", "nodes","services/*","pods/log","replicationcontrollers","replicationcontrollers/*"]
-    verbs: ["get", "list", "watch", "create", "update", "delete"]
+    verbs: ["get", "list", "watch", "create", "update", "delete","patch"]
   - apiGroups: ["storage.k8s.io"]
     resources: ["storageclasses","storageclasses/*"]
-    verbs: ["get", "list", "watch", "create", "update", "delete"]
+    verbs: ["get", "list", "watch", "create", "update", "delete","patch"]
   - apiGroups: ["autoscaling"]
     resources: ["horizontalpodautoscalers","horizontalpodautoscalers/*"]
-    verbs: ["get", "list", "watch", "create", "update", "delete"]
+    verbs: ["get", "list", "watch", "create", "update", "delete","patch"]
 
 
 ---
