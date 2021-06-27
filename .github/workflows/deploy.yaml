@@ -36,5 +36,5 @@ jobs:
             kubectl apply -f ./gh_actions_user.yaml
       - name: Install monitoring stack
         run: |
-            chmod 777 ./deploy_promatheus_stack.sh
-            ./deploy_promatheus_stack.sh
+            chmod 777 ./deploy_prometheus_stack.sh
+            ./deploy_prometheus_stack.sh
