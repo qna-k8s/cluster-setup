@@ -1,0 +1,14 @@
+prometheus:
+  additionalPodMonitors:
+    - name: api_gateway_pod_monitor
+      selector:
+        app: qna-apigateway-pod
+      podMetricsEndpoints:
+        port: 8080
+        path: /actuator/prometheus
+kubeDns:
+  enabled: true
+grafana:
+  service:
+    type: NodePort
+    nodePort: 30020
