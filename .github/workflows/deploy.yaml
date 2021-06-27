@@ -34,3 +34,7 @@ jobs:
       - name: Setup ghactions user for CI/CD
         run: |
             kubectl apply -f ./gh_actions_user.yaml
+      - name: Install monitoring stack
+        run: |
+            chmod 777 ./deploy_promatheus_stack.sh
+            ./deploy_promatheus_stack.sh
