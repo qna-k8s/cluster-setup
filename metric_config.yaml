@@ -4,8 +4,8 @@ prometheus:
       selector:
         app: qna-apigateway-pod
       podMetricsEndpoints:
-        port: 8080
-        path: /actuator/prometheus
+        - port: 8080
+          path: /actuator/prometheus
 kubeDns:
   enabled: true
 grafana:
