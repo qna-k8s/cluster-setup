@@ -13,7 +13,7 @@ prometheus:
         any: true
       selector:
         matchLabels:
-          app: qna-api-gateway-service
+          service: qna-api-gateway-service
       endpoints:
         - port: "http"
           path: "/actuator/prometheus"
