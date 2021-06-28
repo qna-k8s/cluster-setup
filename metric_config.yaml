@@ -23,6 +23,8 @@ prometheus:
     nodePort: 30090    
 kubeDns:
   enabled: true
+coreDns:
+  enabled: false
 grafana:
   service:
     type: NodePort
