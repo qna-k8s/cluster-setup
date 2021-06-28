@@ -9,18 +9,18 @@ prometheus:
           path: "/actuator/prometheus"
   additionalServiceMonitors:
     - name: api-gateway-service-monitor
+      namespaceSelector:
+        any: true
       selector:
         matchLabels:
           app: qna-api-gateway-service
       endpoints:
         - port: "http"
           path: "/actuator/prometheus"
-      
-      
+  service:
+    type: NodePort
+    nodePort: 30090
 
-service:
-  type: NodePort
-  nodePort: 30090
 kubeDns:
   enabled: true
 coreDns:
