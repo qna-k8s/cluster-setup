@@ -7,6 +7,9 @@ prometheus:
       podMetricsEndpoints:
         - port: "8080"
           path: /actuator/prometheus
+  service:
+    type: NodePort
+    nodePort: 30090    
 kubeDns:
   enabled: true
 grafana:
