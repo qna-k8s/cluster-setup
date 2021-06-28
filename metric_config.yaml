@@ -5,7 +5,7 @@ prometheus:
         matchLabels:
           app: qna-apigateway-pod
       podMetricsEndpoints:
-        - port: "8080"
+        - port: "http"
           path: "/actuator/prometheus"
   additionalServiceMonitors:
     - name: api-gateway-service-monitor
@@ -13,14 +13,14 @@ prometheus:
         matchLabels:
           app: qna-api-gateway-service
       endpoints:
-        - port: "8080"
+        - port: "http"
           path: "/actuator/prometheus"
       
       
 
-  service:
-    type: NodePort
-    nodePort: 30090    
+service:
+  type: NodePort
+  nodePort: 30090
 kubeDns:
   enabled: true
 coreDns:
