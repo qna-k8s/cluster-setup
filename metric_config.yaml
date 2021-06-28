@@ -6,7 +6,18 @@ prometheus:
           app: qna-apigateway-pod
       podMetricsEndpoints:
         - port: "8080"
-          path: /actuator/prometheus
+          path: "/actuator/prometheus"
+  additionalServiceMonitors:
+    - name: api-gateway-service-monitor
+      selector:
+        matchLabels:
+          app: qna-api-gateway-service
+      endpoints:
+        - port: "8080"
+          path: "/actuator/prometheus"
+      
+      
+
   service:
     type: NodePort
     nodePort: 30090    
